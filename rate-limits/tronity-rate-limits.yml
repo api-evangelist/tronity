@@ -1,0 +1,63 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: TRONITY
+providerId: tronity
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- Connected Car
+- EV
+- Telematics
+- Fleet
+- Vehicle Data
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  The TRONITY Platform API is OAuth2-secured and access is constrained both by
+  the scopes a vehicle owner grants and by the subscription tier (per vehicle,
+  per administrator). TRONITY does not publish specific numeric request-per-
+  minute or per-day limits in its public help center, and live vehicle reads are
+  also bounded by how frequently the underlying OEM telematics can be polled.
+  Specific per-endpoint and per-account limits are not reconciled in this
+  artifact.
+notes: >-
+  Verify any enforced request quotas, polling intervals and concurrency limits
+  with TRONITY during reconciliation; effective read frequency is also gated by
+  OEM-side telematics availability and the granted scopes per vehicle.
+sources:
+- https://help.tronity.io/hc/en-us/articles/360018514299-Are-there-any-public-application-programming-interfaces-APIs
+- https://app.tronity.tech/docs
+responseCodes:
+  throttled: 429
+limits:
+- name: Requests Per Account
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: Public help center does not publish a numeric RPM/RPD; verify in the platform docs.
+- name: Per-Vehicle Polling
+  scope: vehicle
+  metric: requests
+  limit: see provider documentation
+  notes: Read frequency for live data is bounded by OEM telematics polling cadence.
+- name: Scope-Constrained Access
+  scope: vehicle
+  metric: scopes
+  limit: granted scopes only
+  notes: Each request is limited to the read/write scopes the vehicle owner granted (e.g. read_battery, write_charge_start_stop).
+- name: Subscription Tier
+  scope: account
+  metric: vehicles
+  limit: by plan
+  notes: Number of vehicles and administrator seats available is set by the subscription tier.
+policies:
+- name: Scope Enforcement
+  description: Calls outside the granted OAuth2 scopes are rejected regardless of rate.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

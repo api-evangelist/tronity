@@ -1,0 +1,74 @@
+aid: tronity
+name: TRONITY
+review:
+  question: Does TRONITY expose a documented public WebSocket API?
+  answer: false
+  date: '2026-06-21'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was created. TRONITY's documented public surface is a
+    REST API under https://api.tronity.tech. Event delivery is offered through
+    outbound HTTP webhooks (callbacks to a subscriber URL), not through a
+    WebSocket or Server-Sent Events stream, so there is no streaming transport
+    to model in AsyncAPI at this time.
+findings:
+  summary: |
+    TRONITY does not publish a documented public WebSocket API. The TRONITY
+    Platform API is an OAuth2-secured REST (HTTPS) interface. An app
+    authenticates via POST /oauth/authentication (grant types "app", "code",
+    "refresh_token") to obtain a Bearer token, then reads vehicle data and
+    issues commands over /v1 REST endpoints. Asynchronous, server-initiated
+    delivery is provided via configurable webhooks (HTTP callbacks with a
+    shared secret), not via ws:// or wss:// connections. No bidirectional or
+    realtime WebSocket endpoint is documented for vehicle data, charging, or
+    commands.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.tronity.tech
+      documented: true
+    - protocol: Webhook
+      scheme: https
+      note: Outbound HTTP callbacks to a subscriber URL for vehicle/charging events, verified with a shared secret. One-way server-to-subscriber HTTP, not WebSocket.
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in TRONITY's help center or platform docs as of the review date.
+  endpointsConfirmedRest:
+    - POST https://api.tronity.tech/oauth/authentication
+    - GET  https://api.tronity.tech/v1/vehicles
+    - GET  https://api.tronity.tech/v1/vehicles/{id}
+    - GET  https://api.tronity.tech/v1/vehicles/{vehicleId}/vin
+    - GET  https://api.tronity.tech/v1/vehicles/{vehicleId}/odometer
+    - GET  https://api.tronity.tech/v1/vehicles/{vehicleId}/location
+    - GET  https://api.tronity.tech/v1/vehicles/{vehicleId}/bulk
+    - GET  https://api.tronity.tech/v1/vehicles/{vehicleId}/records
+    - GET  https://api.tronity.tech/v1/vehicles/{vehicleId}/battery
+    - GET  https://api.tronity.tech/v1/vehicles/{vehicleId}/charge
+    - GET  https://api.tronity.tech/v1/vehicles/{vehicleId}/charges
+    - POST https://api.tronity.tech/v1/vehicles/{vehicleId}/charge_start
+    - POST https://api.tronity.tech/v1/vehicles/{vehicleId}/charge_stop
+    - POST https://api.tronity.tech/v1/vehicles/{vehicleId}/wake_up
+    - GET  https://api.tronity.tech/v1/users/{userId}/apps/{appId}/webhooks
+    - POST https://api.tronity.tech/v1/users/{userId}/apps/{appId}/webhooks
+    - DELETE https://api.tronity.tech/v1/users/{userId}/apps/{appId}/webhooks/{id}
+sources:
+  - url: https://help.tronity.io/hc/en-us/articles/360018514299-Are-there-any-public-application-programming-interfaces-APIs
+    type: Documentation
+    note: Confirms public REST API at https://api.tronity.tech secured with OAuth2 (client_id/client_secret); lists read/write scopes. No WebSocket mentioned.
+  - url: https://app.tronity.tech/docs
+    type: APIReference
+    note: Interactive REST API reference behind platform login; all documented operations are HTTPS REST.
+  - url: https://gitlab.com/pegr69/tronity-platform-client
+    type: SDK
+    note: Official TRONITY Python platform client; exposes only /oauth/authentication and /v1 REST endpoints plus webhook CRUD. No WebSocket client.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. Server-initiated event delivery is
+    via outbound HTTP webhooks rather than a streaming transport, so no
+    AsyncAPI document was authored; the REST API and webhook callbacks are
+    documented in the OpenAPI specification instead.

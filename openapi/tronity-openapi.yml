@@ -1,0 +1,607 @@
+openapi: 3.0.1
+info:
+  title: TRONITY Platform API
+  description: >-
+    The TRONITY Platform API provides normalized access to connected electric
+    vehicle and fleet telematics across 20-plus OEM brands. It exposes vehicle
+    listings and VIN, vehicle data (odometer, location, bulk last-known state,
+    records, trips), battery state of charge and range, charging status and
+    history, remote commands (start/stop charging, wake-up), and webhook
+    subscriptions. Access is secured with OAuth2; an app authenticates with a
+    client_id and client_secret to obtain a Bearer access token, and each
+    request is constrained by the scopes the vehicle owner has granted.
+  termsOfService: https://www.tronity.io/en/terms
+  contact:
+    name: TRONITY Support
+    url: https://help.tronity.io
+  version: '1.0'
+servers:
+  - url: https://api.tronity.tech
+    description: TRONITY Platform API
+paths:
+  /oauth/authentication:
+    post:
+      operationId: authControllerAuthentication
+      tags:
+        - Authentication
+      summary: Obtain an OAuth2 access token
+      description: >-
+        Exchanges credentials for a Bearer access token. Apps use grant_type
+        "app" with client_id and client_secret; the authorization-code flow uses
+        grant_type "code" with a code, and tokens may be renewed with
+        grant_type "refresh_token".
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthRequest'
+      responses:
+        '200':
+          description: Access token issued.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '401':
+          description: Invalid credentials.
+  /v1/vehicles:
+    get:
+      operationId: getManyVehicles
+      tags:
+        - Vehicles
+      summary: Retrieve many Vehicle
+      description: Lists the vehicles available to the authenticated app or fleet.
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: A list of vehicles.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Vehicle'
+  /v1/vehicles/{id}:
+    get:
+      operationId: getOneVehicle
+      tags:
+        - Vehicles
+      summary: Retrieve one Vehicle
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/VehicleId'
+      responses:
+        '200':
+          description: A single vehicle.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vehicle'
+    delete:
+      operationId: deleteOneVehicle
+      tags:
+        - Vehicles
+      summary: Delete one Vehicle
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/VehicleId'
+      responses:
+        '200':
+          description: Vehicle deleted.
+  /v1/vehicles/{vehicleId}/vin:
+    get:
+      operationId: vehicleControllerVin
+      tags:
+        - Vehicles
+      summary: Get vin from the vehicle
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/VehicleIdPath'
+      responses:
+        '200':
+          description: The vehicle VIN.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  vin:
+                    type: string
+  /v1/vehicles/{vehicleId}/odometer:
+    get:
+      operationId: vehicleControllerOdometer
+      tags:
+        - Vehicle Data
+      summary: Get odometer from the vehicle
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/VehicleIdPath'
+      responses:
+        '200':
+          description: Odometer reading.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Odometer'
+  /v1/vehicles/{vehicleId}/location:
+    get:
+      operationId: vehicleControllerLocation
+      tags:
+        - Vehicle Data
+      summary: Returns the last known location of the vehicle in geographic coordinates
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/VehicleIdPath'
+      responses:
+        '200':
+          description: Last known location.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+  /v1/vehicles/{vehicleId}/bulk:
+    get:
+      operationId: vehicleControllerBulk
+      tags:
+        - Vehicle Data
+      summary: Read bulk data based on vehicle scope
+      description: >-
+        Returns the last-known combined state of the vehicle (VIN, odometer,
+        range, battery level, charging status and location) within a single
+        response, filtered by the granted scopes.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/VehicleIdPath'
+      responses:
+        '200':
+          description: Bulk last-known vehicle state.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bulk'
+  /v1/vehicles/{vehicleId}/records:
+    get:
+      operationId: getManyRecords
+      tags:
+        - Vehicle Data
+      summary: Retrieve many Record
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/VehicleIdPath'
+      responses:
+        '200':
+          description: A list of telemetry records.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Record'
+  /v1/vehicles/{vehicleId}/trips:
+    get:
+      operationId: getManyTrips
+      tags:
+        - Vehicle Data
+      summary: Retrieve many Trip
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/VehicleIdPath'
+      responses:
+        '200':
+          description: A list of trips.
+  /v1/vehicles/{vehicleId}/idles:
+    get:
+      operationId: getManyIdles
+      tags:
+        - Vehicle Data
+      summary: Retrieve many Idle
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/VehicleIdPath'
+      responses:
+        '200':
+          description: A list of idle periods.
+  /v1/vehicles/{vehicleId}/sleeps:
+    get:
+      operationId: getManySleeps
+      tags:
+        - Vehicle Data
+      summary: Retrieve many Sleep
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/VehicleIdPath'
+      responses:
+        '200':
+          description: A list of sleep periods.
+  /v1/vehicles/{vehicleId}/battery:
+    get:
+      operationId: vehicleControllerBattery
+      tags:
+        - Charging & Battery
+      summary: Read battery's state of charge
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/VehicleIdPath'
+      responses:
+        '200':
+          description: Battery state of charge and range.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Battery'
+  /v1/vehicles/{vehicleId}/charge:
+    get:
+      operationId: vehicleControllerCharge
+      tags:
+        - Charging & Battery
+      summary: Know whether vehicle is charging
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/VehicleIdPath'
+      responses:
+        '200':
+          description: Current charging status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeStatus'
+  /v1/vehicles/{vehicleId}/charges:
+    get:
+      operationId: getManyCharges
+      tags:
+        - Charging & Battery
+      summary: Retrieve many Charge
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/VehicleIdPath'
+      responses:
+        '200':
+          description: A list of charging sessions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Charge'
+  /v1/vehicles/{vehicleId}/charge_start:
+    post:
+      operationId: vehicleControllerChargeStart
+      tags:
+        - Commands
+      summary: Start Charging
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/VehicleIdPath'
+      responses:
+        '200':
+          description: Charge start command accepted.
+  /v1/vehicles/{vehicleId}/charge_stop:
+    post:
+      operationId: vehicleControllerChargeStop
+      tags:
+        - Commands
+      summary: Stop Charging
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/VehicleIdPath'
+      responses:
+        '200':
+          description: Charge stop command accepted.
+  /v1/vehicles/{vehicleId}/wake_up:
+    post:
+      operationId: vehicleControllerWakeUp
+      tags:
+        - Commands
+      summary: Wake Up Car
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/VehicleIdPath'
+      responses:
+        '200':
+          description: Wake-up command accepted.
+  /v1/users/{userId}/apps/{appId}/webhooks:
+    get:
+      operationId: getManyWebhooks
+      tags:
+        - Webhooks
+      summary: Retrieve many Webhook
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+        - $ref: '#/components/parameters/AppId'
+      responses:
+        '200':
+          description: A list of webhooks.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Webhook'
+    post:
+      operationId: createWebhook
+      tags:
+        - Webhooks
+      summary: Create one Webhook
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+        - $ref: '#/components/parameters/AppId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Webhook'
+      responses:
+        '201':
+          description: Webhook created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+  /v1/users/{userId}/apps/{appId}/webhooks/{id}:
+    delete:
+      operationId: deleteWebhook
+      tags:
+        - Webhooks
+      summary: Delete one Webhook
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+        - $ref: '#/components/parameters/AppId'
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Webhook deleted.
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >-
+        OAuth2 Bearer access token obtained from POST /oauth/authentication.
+        Available scopes include read_vin, read_vehicle_info, read_odometer,
+        read_charge, read_battery, read_location, write_charge_start_stop and
+        write_wake_up; the effective scope set is constrained by what the
+        vehicle owner has granted.
+  parameters:
+    VehicleId:
+      name: id
+      in: path
+      required: true
+      description: The vehicle identifier.
+      schema:
+        type: string
+    VehicleIdPath:
+      name: vehicleId
+      in: path
+      required: true
+      description: The vehicle identifier.
+      schema:
+        type: string
+    UserId:
+      name: userId
+      in: path
+      required: true
+      schema:
+        type: string
+    AppId:
+      name: appId
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    AuthRequest:
+      type: object
+      properties:
+        client_id:
+          type: string
+        client_secret:
+          type: string
+        code:
+          type: string
+        refresh_token:
+          type: string
+        grant_type:
+          type: string
+          description: One of "app", "code" or "refresh_token".
+      required:
+        - grant_type
+    AuthResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+        token_type:
+          type: string
+        expires_in:
+          type: number
+        refresh_token:
+          type: string
+    Vehicle:
+      type: object
+      properties:
+        id:
+          type: string
+        scopes:
+          type: array
+          items:
+            type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    Odometer:
+      type: object
+      properties:
+        odometer:
+          type: number
+        timestamp:
+          type: number
+    Location:
+      type: object
+      properties:
+        latitude:
+          type: number
+        longitude:
+          type: number
+        timestamp:
+          type: number
+    Battery:
+      type: object
+      properties:
+        range:
+          type: number
+        level:
+          type: number
+        timestamp:
+          type: number
+    ChargeStatus:
+      type: object
+      properties:
+        charging:
+          type: string
+        timestamp:
+          type: number
+    Bulk:
+      type: object
+      properties:
+        vin:
+          type: string
+        odometer:
+          type: number
+        range:
+          type: number
+        level:
+          type: number
+        charging:
+          type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+        timestamp:
+          type: number
+    Charge:
+      type: object
+      properties:
+        id:
+          type: string
+        start_time:
+          type: number
+        start_level:
+          type: number
+        end_time:
+          type: number
+        end_level:
+          type: number
+        odometer:
+          type: number
+        kWh:
+          type: number
+        batteryKWh:
+          type: number
+        max:
+          type: number
+        range:
+          type: number
+        ac:
+          type: boolean
+        cost:
+          type: number
+        latitude:
+          type: string
+        longitude:
+          type: string
+        type:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    Record:
+      type: object
+      properties:
+        id:
+          type: number
+        level:
+          type: number
+        usable_level:
+          type: number
+        range:
+          type: number
+        speed:
+          type: number
+        power:
+          type: number
+        charger_power:
+          type: number
+        energy_added:
+          type: number
+        soc_max:
+          type: number
+        consumption:
+          type: number
+        out_temp:
+          type: number
+        in_temp:
+          type: number
+        climate:
+          type: boolean
+        charging:
+          type: string
+        driving:
+          type: boolean
+        odometer:
+          type: number
+        latitude:
+          type: string
+        longitude:
+          type: string
+    Webhook:
+      type: object
+      properties:
+        id:
+          type: string
+        url:
+          type: string
+        events:
+          type: array
+          items:
+            type: string
+        active:
+          type: boolean
+        secret:
+          type: string

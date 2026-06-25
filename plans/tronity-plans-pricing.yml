@@ -1,0 +1,142 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: TRONITY
+providerId: tronity
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- Connected Car
+- EV
+- Telematics
+- Fleet
+- Vehicle Data
+- Plans
+description: >-
+  TRONITY prices its consumer apps as low-cost annual subscriptions and its
+  Platform / Fleet API access on a per-vehicle and per-administrator basis.
+  Premium and Professional app customers can consume their own vehicle data via
+  the public API at no additional charge. Fleet service packages start around
+  EUR 5 per vehicle per month, and each Integration or Fleet Administrator seat
+  is billed around EUR 15 per month on an annual subscription. Exact, current
+  figures should be verified on the TRONITY pricing pages.
+notes: >-
+  Pricing is published in EUR and changes over time; per-vehicle and
+  per-administrator API/Platform pricing is summarized here from the TRONITY
+  app, fleet and platform pricing pages and is not reconciled against a live
+  quote.
+sources:
+- https://www.tronity.io/en/tronity-app/pricing
+- https://www.tronity.io/en/fleet-management/pricing
+- https://www.platform.tronity.io/pricing
+- https://help.tronity.io/hc/en-us/articles/360018514299-Are-there-any-public-application-programming-interfaces-APIs
+plans:
+- id: tronity-premium
+  name: Premium
+  type: subscription
+  description: >-
+    Consumer EV monitoring app subscription; includes the ability to consume
+    your own vehicle data via the public Platform API.
+  entries:
+  - label: Premium App Subscription
+    name: premium
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: ~EUR 4.90 per year
+    userMultiplied: false
+  elements:
+  - name: Vehicle Insights
+  - name: Cost Management
+  - name: Own-Vehicle API Access
+- id: tronity-professional
+  name: Professional
+  type: subscription
+  description: >-
+    Higher consumer tier with drivers logbook and extended features; includes
+    own-vehicle public API access.
+  entries:
+  - label: Professional App Subscription
+    name: professional
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: ~EUR 13.90 per year
+    userMultiplied: false
+  elements:
+  - name: Drivers Logbook
+  - name: Vehicle Insights
+  - name: Own-Vehicle API Access
+- id: tronity-fleet
+  name: Fleet
+  type: subscription
+  description: >-
+    Fleet management service packages billed per vehicle per month, with
+    centralized Platform API access to all managed vehicles.
+  entries:
+  - label: Per-Vehicle Fleet Service
+    name: fleet_vehicle
+    type: flat
+    metric: vehicles
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: from ~EUR 5 per vehicle per month
+    userMultiplied: true
+  elements:
+  - name: Fleet Vehicle Data
+  - name: Charging Management
+  - name: Central API Access
+- id: tronity-platform
+  name: Platform / Integration
+  type: subscription
+  description: >-
+    Integration and Fleet Administrator seats that enable custom API
+    integrations and webhook subscriptions across managed vehicles.
+  entries:
+  - label: Integration / Fleet Administrator Seat
+    name: administrator
+    type: flat
+    metric: seats
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: ~EUR 15 per administrator per month (annual subscription)
+    userMultiplied: true
+  elements:
+  - name: Platform API
+  - name: Webhooks
+  - name: Custom Integrations
+- id: tronity-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Volume fleet, white-label and custom integration agreements with negotiated
+    terms. Contact TRONITY.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Custom Volume Pricing
+  - name: White-Label
+  - name: Dedicated Support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

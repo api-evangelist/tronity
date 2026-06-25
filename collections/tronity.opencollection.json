@@ -1,0 +1,150 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TRONITY Platform API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Authentication", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Obtain an OAuth2 access token", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tronity.tech/oauth/authentication",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"client_id\": \"{{clientId}}\",\n  \"client_secret\": \"{{clientSecret}}\",\n  \"grant_type\": \"app\"\n}"
+            }
+          },
+          "docs": "Exchanges credentials for a Bearer access token. Apps use grant_type \"app\" with client_id and client_secret."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Vehicles", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Retrieve many Vehicle", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.tronity.tech/v1/vehicles" },
+          "docs": "Lists the vehicles available to the authenticated app or fleet."
+        },
+        {
+          "info": { "name": "Retrieve one Vehicle", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.tronity.tech/v1/vehicles/{id}" },
+          "docs": "Returns a single vehicle by id."
+        },
+        {
+          "info": { "name": "Get vin from the vehicle", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.tronity.tech/v1/vehicles/{vehicleId}/vin" },
+          "docs": "Returns the VIN for a vehicle."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Vehicle Data", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get odometer from the vehicle", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.tronity.tech/v1/vehicles/{vehicleId}/odometer" },
+          "docs": "Returns the odometer reading."
+        },
+        {
+          "info": { "name": "Returns the last known location of the vehicle", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.tronity.tech/v1/vehicles/{vehicleId}/location" },
+          "docs": "Returns the last known location in geographic coordinates."
+        },
+        {
+          "info": { "name": "Read bulk data based on vehicle scope", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.tronity.tech/v1/vehicles/{vehicleId}/bulk" },
+          "docs": "Returns the combined last-known vehicle state filtered by granted scopes."
+        },
+        {
+          "info": { "name": "Retrieve many Record", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.tronity.tech/v1/vehicles/{vehicleId}/records" },
+          "docs": "Returns telemetry records for a vehicle."
+        },
+        {
+          "info": { "name": "Retrieve many Trip", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.tronity.tech/v1/vehicles/{vehicleId}/trips" },
+          "docs": "Returns trips for a vehicle."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Charging & Battery", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Read battery's state of charge", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.tronity.tech/v1/vehicles/{vehicleId}/battery" },
+          "docs": "Returns battery state of charge and range."
+        },
+        {
+          "info": { "name": "Know whether vehicle is charging", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.tronity.tech/v1/vehicles/{vehicleId}/charge" },
+          "docs": "Returns the current charging status."
+        },
+        {
+          "info": { "name": "Retrieve many Charge", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.tronity.tech/v1/vehicles/{vehicleId}/charges" },
+          "docs": "Returns the history of charging sessions."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Commands", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Start Charging", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.tronity.tech/v1/vehicles/{vehicleId}/charge_start" },
+          "docs": "Starts charging the vehicle (requires write scope)."
+        },
+        {
+          "info": { "name": "Stop Charging", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.tronity.tech/v1/vehicles/{vehicleId}/charge_stop" },
+          "docs": "Stops charging the vehicle (requires write scope)."
+        },
+        {
+          "info": { "name": "Wake Up Car", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.tronity.tech/v1/vehicles/{vehicleId}/wake_up" },
+          "docs": "Wakes up the vehicle (requires write scope)."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Webhooks", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Retrieve many Webhook", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.tronity.tech/v1/users/{userId}/apps/{appId}/webhooks" },
+          "docs": "Lists webhook subscriptions for an app."
+        },
+        {
+          "info": { "name": "Create one Webhook", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tronity.tech/v1/users/{userId}/apps/{appId}/webhooks",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"url\": \"https://example.com/webhook\",\n  \"events\": [\"charge\"],\n  \"active\": true,\n  \"secret\": \"{{webhookSecret}}\"\n}"
+            }
+          },
+          "docs": "Creates a webhook subscription for an app."
+        },
+        {
+          "info": { "name": "Delete one Webhook", "type": "http" },
+          "http": { "method": "DELETE", "url": "https://api.tronity.tech/v1/users/{userId}/apps/{appId}/webhooks/{id}" },
+          "docs": "Deletes a webhook subscription."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
