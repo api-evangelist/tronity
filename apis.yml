@@ -114,6 +114,12 @@ apis:
     HTTP callbacks for vehicle and charging events, with a shared secret for payload
     verification.
 common:
+- type: VulnerabilityDisclosure
+  url: security/tronity-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/tronity-domain-security.yml
+- type: Authentication
+  url: authentication/tronity-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/tronity
 - type: LinkedIn

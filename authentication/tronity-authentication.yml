@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/tronity-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: OAuth2 Bearer access token obtained from POST /oauth/authentication. Available
+    scopes include read_vin, read_vehicle_info, read_odometer, read_charge, read_battery, read_location,
+    write_charge_start_stop and write_wake_up; the effective scope set is constrained by what
+    the vehicle owner has granted.
+  sources:
+  - openapi/tronity-openapi.yml
