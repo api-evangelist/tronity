@@ -114,6 +114,8 @@ apis:
     HTTP callbacks for vehicle and charging events, with a shared secret for payload
     verification.
 common:
+- type: AgenticAccess
+  url: agentic-access/tronity-agentic-access.yml
 - type: VulnerabilityDisclosure
   url: security/tronity-vulnerability-disclosure.yml
 - type: DomainSecurity
