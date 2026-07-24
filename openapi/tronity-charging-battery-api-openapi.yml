@@ -1,0 +1,139 @@
+openapi: 3.0.1
+info:
+  title: TRONITY Platform Authentication Charging & Battery API
+  description: The TRONITY Platform API provides normalized access to connected electric vehicle and fleet telematics across 20-plus OEM brands. It exposes vehicle listings and VIN, vehicle data (odometer, location, bulk last-known state, records, trips), battery state of charge and range, charging status and history, remote commands (start/stop charging, wake-up), and webhook subscriptions. Access is secured with OAuth2; an app authenticates with a client_id and client_secret to obtain a Bearer access token, and each request is constrained by the scopes the vehicle owner has granted.
+  termsOfService: https://www.tronity.io/en/terms
+  contact:
+    name: TRONITY Support
+    url: https://help.tronity.io
+  version: '1.0'
+servers:
+- url: https://api.tronity.tech
+  description: TRONITY Platform API
+tags:
+- name: Charging & Battery
+paths:
+  /v1/vehicles/{vehicleId}/battery:
+    get:
+      operationId: vehicleControllerBattery
+      tags:
+      - Charging & Battery
+      summary: Read battery's state of charge
+      security:
+      - bearerAuth: []
+      parameters:
+      - $ref: '#/components/parameters/VehicleIdPath'
+      responses:
+        '200':
+          description: Battery state of charge and range.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Battery'
+  /v1/vehicles/{vehicleId}/charge:
+    get:
+      operationId: vehicleControllerCharge
+      tags:
+      - Charging & Battery
+      summary: Know whether vehicle is charging
+      security:
+      - bearerAuth: []
+      parameters:
+      - $ref: '#/components/parameters/VehicleIdPath'
+      responses:
+        '200':
+          description: Current charging status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeStatus'
+  /v1/vehicles/{vehicleId}/charges:
+    get:
+      operationId: getManyCharges
+      tags:
+      - Charging & Battery
+      summary: Retrieve many Charge
+      security:
+      - bearerAuth: []
+      parameters:
+      - $ref: '#/components/parameters/VehicleIdPath'
+      responses:
+        '200':
+          description: A list of charging sessions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Charge'
+components:
+  schemas:
+    ChargeStatus:
+      type: object
+      properties:
+        charging:
+          type: string
+        timestamp:
+          type: number
+    Battery:
+      type: object
+      properties:
+        range:
+          type: number
+        level:
+          type: number
+        timestamp:
+          type: number
+    Charge:
+      type: object
+      properties:
+        id:
+          type: string
+        start_time:
+          type: number
+        start_level:
+          type: number
+        end_time:
+          type: number
+        end_level:
+          type: number
+        odometer:
+          type: number
+        kWh:
+          type: number
+        batteryKWh:
+          type: number
+        max:
+          type: number
+        range:
+          type: number
+        ac:
+          type: boolean
+        cost:
+          type: number
+        latitude:
+          type: string
+        longitude:
+          type: string
+        type:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+  parameters:
+    VehicleIdPath:
+      name: vehicleId
+      in: path
+      required: true
+      description: The vehicle identifier.
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth2 Bearer access token obtained from POST /oauth/authentication. Available scopes include read_vin, read_vehicle_info, read_odometer, read_charge, read_battery, read_location, write_charge_start_stop and write_wake_up; the effective scope set is constrained by what the vehicle owner has granted.

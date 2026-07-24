@@ -1,0 +1,113 @@
+openapi: 3.0.1
+info:
+  title: TRONITY Platform Authentication Webhooks API
+  description: The TRONITY Platform API provides normalized access to connected electric vehicle and fleet telematics across 20-plus OEM brands. It exposes vehicle listings and VIN, vehicle data (odometer, location, bulk last-known state, records, trips), battery state of charge and range, charging status and history, remote commands (start/stop charging, wake-up), and webhook subscriptions. Access is secured with OAuth2; an app authenticates with a client_id and client_secret to obtain a Bearer access token, and each request is constrained by the scopes the vehicle owner has granted.
+  termsOfService: https://www.tronity.io/en/terms
+  contact:
+    name: TRONITY Support
+    url: https://help.tronity.io
+  version: '1.0'
+servers:
+- url: https://api.tronity.tech
+  description: TRONITY Platform API
+tags:
+- name: Webhooks
+paths:
+  /v1/users/{userId}/apps/{appId}/webhooks:
+    get:
+      operationId: getManyWebhooks
+      tags:
+      - Webhooks
+      summary: Retrieve many Webhook
+      security:
+      - bearerAuth: []
+      parameters:
+      - $ref: '#/components/parameters/UserId'
+      - $ref: '#/components/parameters/AppId'
+      responses:
+        '200':
+          description: A list of webhooks.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Webhook'
+    post:
+      operationId: createWebhook
+      tags:
+      - Webhooks
+      summary: Create one Webhook
+      security:
+      - bearerAuth: []
+      parameters:
+      - $ref: '#/components/parameters/UserId'
+      - $ref: '#/components/parameters/AppId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Webhook'
+      responses:
+        '201':
+          description: Webhook created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+  /v1/users/{userId}/apps/{appId}/webhooks/{id}:
+    delete:
+      operationId: deleteWebhook
+      tags:
+      - Webhooks
+      summary: Delete one Webhook
+      security:
+      - bearerAuth: []
+      parameters:
+      - $ref: '#/components/parameters/UserId'
+      - $ref: '#/components/parameters/AppId'
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Webhook deleted.
+components:
+  parameters:
+    UserId:
+      name: userId
+      in: path
+      required: true
+      schema:
+        type: string
+    AppId:
+      name: appId
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    Webhook:
+      type: object
+      properties:
+        id:
+          type: string
+        url:
+          type: string
+        events:
+          type: array
+          items:
+            type: string
+        active:
+          type: boolean
+        secret:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth2 Bearer access token obtained from POST /oauth/authentication. Available scopes include read_vin, read_vehicle_info, read_odometer, read_charge, read_battery, read_location, write_charge_start_stop and write_wake_up; the effective scope set is constrained by what the vehicle owner has granted.

@@ -1,0 +1,215 @@
+openapi: 3.0.1
+info:
+  title: TRONITY Platform Authentication Vehicle Data API
+  description: The TRONITY Platform API provides normalized access to connected electric vehicle and fleet telematics across 20-plus OEM brands. It exposes vehicle listings and VIN, vehicle data (odometer, location, bulk last-known state, records, trips), battery state of charge and range, charging status and history, remote commands (start/stop charging, wake-up), and webhook subscriptions. Access is secured with OAuth2; an app authenticates with a client_id and client_secret to obtain a Bearer access token, and each request is constrained by the scopes the vehicle owner has granted.
+  termsOfService: https://www.tronity.io/en/terms
+  contact:
+    name: TRONITY Support
+    url: https://help.tronity.io
+  version: '1.0'
+servers:
+- url: https://api.tronity.tech
+  description: TRONITY Platform API
+tags:
+- name: Vehicle Data
+paths:
+  /v1/vehicles/{vehicleId}/odometer:
+    get:
+      operationId: vehicleControllerOdometer
+      tags:
+      - Vehicle Data
+      summary: Get odometer from the vehicle
+      security:
+      - bearerAuth: []
+      parameters:
+      - $ref: '#/components/parameters/VehicleIdPath'
+      responses:
+        '200':
+          description: Odometer reading.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Odometer'
+  /v1/vehicles/{vehicleId}/location:
+    get:
+      operationId: vehicleControllerLocation
+      tags:
+      - Vehicle Data
+      summary: Returns the last known location of the vehicle in geographic coordinates
+      security:
+      - bearerAuth: []
+      parameters:
+      - $ref: '#/components/parameters/VehicleIdPath'
+      responses:
+        '200':
+          description: Last known location.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+  /v1/vehicles/{vehicleId}/bulk:
+    get:
+      operationId: vehicleControllerBulk
+      tags:
+      - Vehicle Data
+      summary: Read bulk data based on vehicle scope
+      description: Returns the last-known combined state of the vehicle (VIN, odometer, range, battery level, charging status and location) within a single response, filtered by the granted scopes.
+      security:
+      - bearerAuth: []
+      parameters:
+      - $ref: '#/components/parameters/VehicleIdPath'
+      responses:
+        '200':
+          description: Bulk last-known vehicle state.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bulk'
+  /v1/vehicles/{vehicleId}/records:
+    get:
+      operationId: getManyRecords
+      tags:
+      - Vehicle Data
+      summary: Retrieve many Record
+      security:
+      - bearerAuth: []
+      parameters:
+      - $ref: '#/components/parameters/VehicleIdPath'
+      responses:
+        '200':
+          description: A list of telemetry records.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Record'
+  /v1/vehicles/{vehicleId}/trips:
+    get:
+      operationId: getManyTrips
+      tags:
+      - Vehicle Data
+      summary: Retrieve many Trip
+      security:
+      - bearerAuth: []
+      parameters:
+      - $ref: '#/components/parameters/VehicleIdPath'
+      responses:
+        '200':
+          description: A list of trips.
+  /v1/vehicles/{vehicleId}/idles:
+    get:
+      operationId: getManyIdles
+      tags:
+      - Vehicle Data
+      summary: Retrieve many Idle
+      security:
+      - bearerAuth: []
+      parameters:
+      - $ref: '#/components/parameters/VehicleIdPath'
+      responses:
+        '200':
+          description: A list of idle periods.
+  /v1/vehicles/{vehicleId}/sleeps:
+    get:
+      operationId: getManySleeps
+      tags:
+      - Vehicle Data
+      summary: Retrieve many Sleep
+      security:
+      - bearerAuth: []
+      parameters:
+      - $ref: '#/components/parameters/VehicleIdPath'
+      responses:
+        '200':
+          description: A list of sleep periods.
+components:
+  parameters:
+    VehicleIdPath:
+      name: vehicleId
+      in: path
+      required: true
+      description: The vehicle identifier.
+      schema:
+        type: string
+  schemas:
+    Odometer:
+      type: object
+      properties:
+        odometer:
+          type: number
+        timestamp:
+          type: number
+    Location:
+      type: object
+      properties:
+        latitude:
+          type: number
+        longitude:
+          type: number
+        timestamp:
+          type: number
+    Record:
+      type: object
+      properties:
+        id:
+          type: number
+        level:
+          type: number
+        usable_level:
+          type: number
+        range:
+          type: number
+        speed:
+          type: number
+        power:
+          type: number
+        charger_power:
+          type: number
+        energy_added:
+          type: number
+        soc_max:
+          type: number
+        consumption:
+          type: number
+        out_temp:
+          type: number
+        in_temp:
+          type: number
+        climate:
+          type: boolean
+        charging:
+          type: string
+        driving:
+          type: boolean
+        odometer:
+          type: number
+        latitude:
+          type: string
+        longitude:
+          type: string
+    Bulk:
+      type: object
+      properties:
+        vin:
+          type: string
+        odometer:
+          type: number
+        range:
+          type: number
+        level:
+          type: number
+        charging:
+          type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+        timestamp:
+          type: number
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth2 Bearer access token obtained from POST /oauth/authentication. Available scopes include read_vin, read_vehicle_info, read_odometer, read_charge, read_battery, read_location, write_charge_start_stop and write_wake_up; the effective scope set is constrained by what the vehicle owner has granted.
