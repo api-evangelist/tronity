@@ -7,7 +7,20 @@ description: TRONITY is a connected-car platform that aggregates electric vehicl
   Platform API exposes vehicle data - battery state of charge, range, odometer, location,
   charging sessions and trips - plus remote commands (start/stop charging, wake-up)
   and webhooks, secured with OAuth2.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/tronity.png
 tags:
 - Connected Car
 - EV
@@ -18,101 +31,96 @@ created: '2026-06-21'
 modified: '2026-06-21'
 specificationVersion: '0.19'
 apis:
-- aid: tronity:tronity-vehicles-api
-  name: TRONITY Vehicles API
-  tags:
-  - Vehicles
-  - VIN
-  - Telematics
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+- aid: tronity:tronity-authentication-api
+  name: TRONITY Authentication API
+  description: The Authentication API from TRONITY — 1 operation(s) for authentication.
   humanURL: https://app.tronity.tech/docs
   baseURL: https://api.tronity.tech
-  properties:
-  - url: https://help.tronity.io/hc/en-us/articles/360018514299-Are-there-any-public-application-programming-interfaces-APIs
-    type: Documentation
-  - url: https://app.tronity.tech/docs
-    type: APIReference
-  - url: openapi/tronity-openapi.yml
-    type: OpenAPI
-  description: Lists the connected vehicles available to an authenticated app or fleet,
-    returns per-vehicle metadata and authorized scopes, and reads VIN for an individual
-    vehicle across 20-plus supported OEM brands.
-- aid: tronity:tronity-vehicle-data-api
-  name: TRONITY Vehicle Data API
   tags:
-  - Vehicle Data
-  - Odometer
-  - Location
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://app.tronity.tech/docs
-  baseURL: https://api.tronity.tech
+  - Authentication
   properties:
-  - url: https://help.tronity.io/hc/en-us/articles/360018514299-Are-there-any-public-application-programming-interfaces-APIs
-    type: Documentation
-  - url: https://app.tronity.tech/docs
-    type: APIReference
-  - url: openapi/tronity-openapi.yml
-    type: OpenAPI
-  description: Reads normalized telematics for a vehicle - odometer, geographic location,
-    bulk last-known state, and historical records, trips, idles and sleeps - subject
-    to the scopes granted by the vehicle owner.
+  - type: OpenAPI
+    url: openapi/tronity-authentication-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.tronity.io/hc/en-us/articles/360018514299-Are-there-any-public-application-programming-interfaces-APIs
+  - type: APIReference
+    url: https://app.tronity.tech/docs
 - aid: tronity:tronity-charging-battery-api
   name: TRONITY Charging & Battery API
-  tags:
-  - Charging
-  - Battery
-  - State of Charge
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  description: The Charging & Battery API from TRONITY — 3 operation(s) for charging & battery.
   humanURL: https://app.tronity.tech/docs
   baseURL: https://api.tronity.tech
+  tags:
+  - Charging & Battery
   properties:
-  - url: https://help.tronity.io/hc/en-us/articles/360018514299-Are-there-any-public-application-programming-interfaces-APIs
-    type: Documentation
-  - url: https://app.tronity.tech/docs
-    type: APIReference
-  - url: openapi/tronity-openapi.yml
-    type: OpenAPI
-  description: Reads battery state of charge and range, the current charging status,
-    and the history of charging sessions with energy, cost and location detail for
-    a connected vehicle.
+  - type: OpenAPI
+    url: openapi/tronity-charging-battery-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.tronity.io/hc/en-us/articles/360018514299-Are-there-any-public-application-programming-interfaces-APIs
+  - type: APIReference
+    url: https://app.tronity.tech/docs
 - aid: tronity:tronity-commands-api
   name: TRONITY Commands API
+  description: The Commands API from TRONITY — 3 operation(s) for commands.
+  humanURL: https://app.tronity.tech/docs
+  baseURL: https://api.tronity.tech
   tags:
   - Commands
-  - Remote Control
-  - Charging
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  properties:
+  - type: OpenAPI
+    url: openapi/tronity-commands-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.tronity.io/hc/en-us/articles/360018514299-Are-there-any-public-application-programming-interfaces-APIs
+  - type: APIReference
+    url: https://app.tronity.tech/docs
+- aid: tronity:tronity-vehicle-data-api
+  name: TRONITY Vehicle Data API
+  description: The Vehicle Data API from TRONITY — 7 operation(s) for vehicle data.
   humanURL: https://app.tronity.tech/docs
   baseURL: https://api.tronity.tech
+  tags:
+  - Vehicle Data
   properties:
-  - url: https://help.tronity.io/hc/en-us/articles/360018514299-Are-there-any-public-application-programming-interfaces-APIs
-    type: Documentation
-  - url: https://app.tronity.tech/docs
-    type: APIReference
-  - url: openapi/tronity-openapi.yml
-    type: OpenAPI
-  description: Sends remote commands to a vehicle - start charging, stop charging and
-    wake-up - where the vehicle and the granted write scopes permit, using OAuth2-secured
-    POST endpoints.
+  - type: OpenAPI
+    url: openapi/tronity-vehicle-data-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.tronity.io/hc/en-us/articles/360018514299-Are-there-any-public-application-programming-interfaces-APIs
+  - type: APIReference
+    url: https://app.tronity.tech/docs
+- aid: tronity:tronity-vehicles-api
+  name: TRONITY Vehicles API
+  description: The Vehicles API from TRONITY — 3 operation(s) for vehicles.
+  humanURL: https://app.tronity.tech/docs
+  baseURL: https://api.tronity.tech
+  tags:
+  - Vehicles
+  properties:
+  - type: OpenAPI
+    url: openapi/tronity-vehicles-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.tronity.io/hc/en-us/articles/360018514299-Are-there-any-public-application-programming-interfaces-APIs
+  - type: APIReference
+    url: https://app.tronity.tech/docs
 - aid: tronity:tronity-webhooks-api
   name: TRONITY Webhooks API
-  tags:
-  - Webhooks
-  - Events
-  - Notifications
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  description: The Webhooks API from TRONITY — 2 operation(s) for webhooks.
   humanURL: https://app.tronity.tech/docs
   baseURL: https://api.tronity.tech
+  tags:
+  - Webhooks
   properties:
-  - url: https://help.tronity.io/hc/en-us/articles/360018514299-Are-there-any-public-application-programming-interfaces-APIs
-    type: Documentation
-  - url: https://app.tronity.tech/docs
-    type: APIReference
-  - url: openapi/tronity-openapi.yml
-    type: OpenAPI
-  description: Manages webhook subscriptions on an app so external systems receive
-    HTTP callbacks for vehicle and charging events, with a shared secret for payload
-    verification.
+  - type: OpenAPI
+    url: openapi/tronity-webhooks-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.tronity.io/hc/en-us/articles/360018514299-Are-there-any-public-application-programming-interfaces-APIs
+  - type: APIReference
+    url: https://app.tronity.tech/docs
 common:
 - type: AgenticAccess
   url: agentic-access/tronity-agentic-access.yml
