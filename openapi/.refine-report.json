@@ -1,0 +1,24 @@
+{
+  "provider": "tronity",
+  "sources": [
+    "tronity-authentication-api-openapi.yml",
+    "tronity-charging-battery-api-openapi.yml",
+    "tronity-commands-api-openapi.yml",
+    "tronity-vehicle-data-api-openapi.yml",
+    "tronity-vehicles-api-openapi.yml",
+    "tronity-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "tronity-authentication-api-openapi.yml",
+    "tronity-charging-battery-api-openapi.yml",
+    "tronity-commands-api-openapi.yml",
+    "tronity-vehicle-data-api-openapi.yml",
+    "tronity-vehicles-api-openapi.yml",
+    "tronity-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
