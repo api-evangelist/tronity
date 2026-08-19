@@ -1,0 +1,179 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TRONITY Platform Authentication Vehicle Data API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Vehicle Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get odometer from the vehicle",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tronity.tech/v1/vehicles/:vehicleId/odometer",
+            "params": [
+              {
+                "name": "vehicleId",
+                "value": "",
+                "type": "path",
+                "description": "The vehicle identifier."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get odometer from the vehicle"
+        },
+        {
+          "info": {
+            "name": "Returns the last known location of the vehicle in geographic coordinates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tronity.tech/v1/vehicles/:vehicleId/location",
+            "params": [
+              {
+                "name": "vehicleId",
+                "value": "",
+                "type": "path",
+                "description": "The vehicle identifier."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the last known location of the vehicle in geographic coordinates"
+        },
+        {
+          "info": {
+            "name": "Read bulk data based on vehicle scope",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tronity.tech/v1/vehicles/:vehicleId/bulk",
+            "params": [
+              {
+                "name": "vehicleId",
+                "value": "",
+                "type": "path",
+                "description": "The vehicle identifier."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the last-known combined state of the vehicle (VIN, odometer, range, battery level, charging status and location) within a single response, filtered by the granted scopes."
+        },
+        {
+          "info": {
+            "name": "Retrieve many Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tronity.tech/v1/vehicles/:vehicleId/records",
+            "params": [
+              {
+                "name": "vehicleId",
+                "value": "",
+                "type": "path",
+                "description": "The vehicle identifier."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve many Record"
+        },
+        {
+          "info": {
+            "name": "Retrieve many Trip",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tronity.tech/v1/vehicles/:vehicleId/trips",
+            "params": [
+              {
+                "name": "vehicleId",
+                "value": "",
+                "type": "path",
+                "description": "The vehicle identifier."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve many Trip"
+        },
+        {
+          "info": {
+            "name": "Retrieve many Idle",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tronity.tech/v1/vehicles/:vehicleId/idles",
+            "params": [
+              {
+                "name": "vehicleId",
+                "value": "",
+                "type": "path",
+                "description": "The vehicle identifier."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve many Idle"
+        },
+        {
+          "info": {
+            "name": "Retrieve many Sleep",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tronity.tech/v1/vehicles/:vehicleId/sleeps",
+            "params": [
+              {
+                "name": "vehicleId",
+                "value": "",
+                "type": "path",
+                "description": "The vehicle identifier."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve many Sleep"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

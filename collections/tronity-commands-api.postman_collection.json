@@ -1,0 +1,317 @@
+{
+  "item": [
+    {
+      "id": "a8430dfd-fee3-4f61-a32a-049c40875666",
+      "name": "Commands",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "53f504bb-ccf0-4626-845d-5e88b7a46bce",
+          "name": "Start Charging",
+          "request": {
+            "name": "Start Charging",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "vehicles",
+                ":vehicleId",
+                "charge_start"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vehicleId",
+                  "description": "(Required) The vehicle identifier."
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8af9f851-89b8-4afd-98ff-d0d385f6ce58",
+              "name": "Charge start command accepted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vehicles",
+                    ":vehicleId",
+                    "charge_start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vehicleId",
+                      "description": "(Required) The vehicle identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "552ac2de-ccb8-4a49-b3ed-98acaf08078c",
+          "name": "Stop Charging",
+          "request": {
+            "name": "Stop Charging",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "vehicles",
+                ":vehicleId",
+                "charge_stop"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vehicleId",
+                  "description": "(Required) The vehicle identifier."
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a0595699-e722-4af8-9c18-69ca5afb7533",
+              "name": "Charge stop command accepted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vehicles",
+                    ":vehicleId",
+                    "charge_stop"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vehicleId",
+                      "description": "(Required) The vehicle identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "998d3a1d-b8e5-4a47-9665-9861dec4f887",
+          "name": "Wake Up Car",
+          "request": {
+            "name": "Wake Up Car",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "vehicles",
+                ":vehicleId",
+                "wake_up"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vehicleId",
+                  "description": "(Required) The vehicle identifier."
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "656f4399-96fe-4d55-881e-794a5514819a",
+              "name": "Wake-up command accepted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vehicles",
+                    ":vehicleId",
+                    "wake_up"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vehicleId",
+                      "description": "(Required) The vehicle identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tronity.tech",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "338a445b-dacb-49ac-bef1-152c7f97a6ff",
+    "name": "TRONITY Platform Authentication Commands API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The TRONITY Platform API provides normalized access to connected electric vehicle and fleet telematics across 20-plus OEM brands. It exposes vehicle listings and VIN, vehicle data (odometer, location, bulk last-known state, records, trips), battery state of charge and range, charging status and history, remote commands (start/stop charging, wake-up), and webhook subscriptions. Access is secured with OAuth2; an app authenticates with a client_id and client_secret to obtain a Bearer access token, and each request is constrained by the scopes the vehicle owner has granted.\n\nContact Support:\n Name: TRONITY Support",
+      "type": "text/plain"
+    }
+  }
+}

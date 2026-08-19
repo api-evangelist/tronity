@@ -1,0 +1,87 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TRONITY Platform Authentication Commands API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Commands",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Start Charging",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tronity.tech/v1/vehicles/:vehicleId/charge_start",
+            "params": [
+              {
+                "name": "vehicleId",
+                "value": "",
+                "type": "path",
+                "description": "The vehicle identifier."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Start Charging"
+        },
+        {
+          "info": {
+            "name": "Stop Charging",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tronity.tech/v1/vehicles/:vehicleId/charge_stop",
+            "params": [
+              {
+                "name": "vehicleId",
+                "value": "",
+                "type": "path",
+                "description": "The vehicle identifier."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Stop Charging"
+        },
+        {
+          "info": {
+            "name": "Wake Up Car",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tronity.tech/v1/vehicles/:vehicleId/wake_up",
+            "params": [
+              {
+                "name": "vehicleId",
+                "value": "",
+                "type": "path",
+                "description": "The vehicle identifier."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Wake Up Car"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,108 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TRONITY Platform Authentication Webhooks API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve many Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tronity.tech/v1/users/:userId/apps/:appId/webhooks",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve many Webhook"
+        },
+        {
+          "info": {
+            "name": "Create one Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tronity.tech/v1/users/:userId/apps/:appId/webhooks",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create one Webhook"
+        },
+        {
+          "info": {
+            "name": "Delete one Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tronity.tech/v1/users/:userId/apps/:appId/webhooks/:id",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete one Webhook"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

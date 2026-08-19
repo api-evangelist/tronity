@@ -1,0 +1,347 @@
+{
+  "item": [
+    {
+      "id": "d33383ed-f790-4e48-9079-63243031f967",
+      "name": "Charging & Battery",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f1e4abb7-8fe7-4bdb-be02-733257f4af1c",
+          "name": "Read battery's state of charge",
+          "request": {
+            "name": "Read battery's state of charge",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "vehicles",
+                ":vehicleId",
+                "battery"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vehicleId",
+                  "description": "(Required) The vehicle identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5c70363e-3742-4125-bc98-9f45b196e9ff",
+              "name": "Battery state of charge and range.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vehicles",
+                    ":vehicleId",
+                    "battery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vehicleId",
+                      "description": "(Required) The vehicle identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"range\": 9917.161957583477,\n  \"level\": 3094.211007203861,\n  \"timestamp\": 4209.0967690052485\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bd527581-2319-41ae-a66b-fcc9df35860c",
+          "name": "Know whether vehicle is charging",
+          "request": {
+            "name": "Know whether vehicle is charging",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "vehicles",
+                ":vehicleId",
+                "charge"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vehicleId",
+                  "description": "(Required) The vehicle identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "033a43e1-cd8f-4757-9967-a37647e08bde",
+              "name": "Current charging status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vehicles",
+                    ":vehicleId",
+                    "charge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vehicleId",
+                      "description": "(Required) The vehicle identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"charging\": \"string\",\n  \"timestamp\": 8181.682403776006\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "14cefab3-31b9-4efd-860f-c6afbbe5b96f",
+          "name": "Retrieve many Charge",
+          "request": {
+            "name": "Retrieve many Charge",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "vehicles",
+                ":vehicleId",
+                "charges"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vehicleId",
+                  "description": "(Required) The vehicle identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e80342d2-6bfb-4e14-bc91-d6d90b39a16d",
+              "name": "A list of charging sessions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vehicles",
+                    ":vehicleId",
+                    "charges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vehicleId",
+                      "description": "(Required) The vehicle identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"start_time\": 5901.314185329453,\n    \"start_level\": 5847.203162631725,\n    \"end_time\": 5657.586034354093,\n    \"end_level\": 3172.3163788550714,\n    \"odometer\": 8118.3256008318995,\n    \"kWh\": 5116.7237832605115,\n    \"batteryKWh\": 9590.984759811743,\n    \"max\": 4853.550980776222,\n    \"range\": 5471.773164188104,\n    \"ac\": true,\n    \"cost\": 732.6170462294823,\n    \"latitude\": \"string\",\n    \"longitude\": \"string\",\n    \"type\": \"string\",\n    \"created_at\": \"1990-03-06T20:05:08.940Z\",\n    \"updated_at\": \"1973-04-29T06:21:34.442Z\"\n  },\n  {\n    \"id\": \"string\",\n    \"start_time\": 7183.491165347928,\n    \"start_level\": 7797.262462753402,\n    \"end_time\": 8337.524844130161,\n    \"end_level\": 8523.489609364859,\n    \"odometer\": 3654.269661463111,\n    \"kWh\": 8281.332690410341,\n    \"batteryKWh\": 939.5706746808019,\n    \"max\": 7493.339857710764,\n    \"range\": 5486.665010560326,\n    \"ac\": true,\n    \"cost\": 9703.053146316417,\n    \"latitude\": \"string\",\n    \"longitude\": \"string\",\n    \"type\": \"string\",\n    \"created_at\": \"1955-07-11T17:07:10.478Z\",\n    \"updated_at\": \"1976-06-20T08:43:40.783Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tronity.tech",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2652af9c-2fa5-4924-89b8-c427e86272fd",
+    "name": "TRONITY Platform Authentication Charging & Battery API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The TRONITY Platform API provides normalized access to connected electric vehicle and fleet telematics across 20-plus OEM brands. It exposes vehicle listings and VIN, vehicle data (odometer, location, bulk last-known state, records, trips), battery state of charge and range, charging status and history, remote commands (start/stop charging, wake-up), and webhook subscriptions. Access is secured with OAuth2; an app authenticates with a client_id and client_secret to obtain a Bearer access token, and each request is constrained by the scopes the vehicle owner has granted.\n\nContact Support:\n Name: TRONITY Support",
+      "type": "text/plain"
+    }
+  }
+}

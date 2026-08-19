@@ -1,0 +1,87 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TRONITY Platform Authentication Charging & Battery API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Charging & Battery",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Read battery's state of charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tronity.tech/v1/vehicles/:vehicleId/battery",
+            "params": [
+              {
+                "name": "vehicleId",
+                "value": "",
+                "type": "path",
+                "description": "The vehicle identifier."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Read battery's state of charge"
+        },
+        {
+          "info": {
+            "name": "Know whether vehicle is charging",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tronity.tech/v1/vehicles/:vehicleId/charge",
+            "params": [
+              {
+                "name": "vehicleId",
+                "value": "",
+                "type": "path",
+                "description": "The vehicle identifier."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Know whether vehicle is charging"
+        },
+        {
+          "info": {
+            "name": "Retrieve many Charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tronity.tech/v1/vehicles/:vehicleId/charges",
+            "params": [
+              {
+                "name": "vehicleId",
+                "value": "",
+                "type": "path",
+                "description": "The vehicle identifier."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve many Charge"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

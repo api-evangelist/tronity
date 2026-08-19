@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TRONITY Platform Authentication API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Obtain an OAuth2 access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tronity.tech/oauth/authentication",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Exchanges credentials for a Bearer access token. Apps use grant_type \"app\" with client_id and client_secret; the authorization-code flow uses grant_type \"code\" with a code, and tokens may be renewed with grant_type \"refresh_token\"."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
