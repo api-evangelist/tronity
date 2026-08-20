@@ -112,6 +112,8 @@ apis:
   humanURL: https://app.tronity.tech/docs
   baseURL: https://api.tronity.tech
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
