@@ -136,6 +136,9 @@ apis:
   - type: APIReference
     url: https://app.tronity.tech/docs
 common:
+- type: CapabilityMap
+  url: capabilities/tronity-capability-edges.yml
+  name: TRONITY Business Capability Map
 - type: AgenticAccess
   url: agentic-access/tronity-agentic-access.yml
 - type: VulnerabilityDisclosure

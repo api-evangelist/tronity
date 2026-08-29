@@ -1,0 +1,43 @@
+slug: tronity
+provider: TRONITY
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Automotive & Mobility
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Vehicle Data
+  spec_file: tronity-vehicle-data-api-openapi.yml
+  capability_id: BC-3460.40
+  capability_id_l1: BC-3460
+  capability_name: Vehicle Data Platform Operations
+  confidence: 0.75
+  evidence: '"Get odometer from the vehicle", "Returns the last known location of the vehicle", "Retrieve
+    many Trip"'
+  reason: Ingestion and sharing of vehicle telemetry (odometer, location, records, trips) across OEM brands
+    — vehicle data platform operations.
+- tag: Charging & Battery
+  spec_file: tronity-charging-battery-api-openapi.yml
+  capability_id: BC-3460.10
+  capability_id_l1: BC-3460
+  capability_name: Vehicle Connectivity Platform Operations
+  confidence: 0.7
+  evidence: '"Read battery''s state of charge", "Know whether vehicle is charging", "Retrieve many Charge"'
+  reason: Reads normalized connected-vehicle telemetry (battery SoC, charging status/history) from OEM
+    cloud APIs — vehicle connectivity/telemetry platform operations rather than charge-point operation.
+- tag: Commands
+  spec_file: tronity-commands-api-openapi.yml
+  capability_id: BC-3460.10
+  capability_id_l1: BC-3460
+  capability_name: Vehicle Connectivity Platform Operations
+  confidence: 0.7
+  evidence: '"Start Charging", "Stop Charging", "Wake Up Car"'
+  reason: Remote vehicle commands executed via the connected-vehicle cloud platform; fits connected services
+    / vehicle-to-cloud platform operations.
