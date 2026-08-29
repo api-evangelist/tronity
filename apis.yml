@@ -7,6 +7,18 @@ description: TRONITY is a connected-car platform that aggregates electric vehicl
   Platform API exposes vehicle data - battery state of charge, range, odometer, location,
   charging sessions and trips - plus remote commands (start/stop charging, wake-up)
   and webhooks, secured with OAuth2.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
