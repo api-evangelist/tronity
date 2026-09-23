@@ -1,12 +1,7 @@
 {
   "provider": "tronity",
   "sources": [
-    "tronity-authentication-api-openapi.yml",
-    "tronity-charging-battery-api-openapi.yml",
-    "tronity-commands-api-openapi.yml",
-    "tronity-vehicle-data-api-openapi.yml",
-    "tronity-vehicles-api-openapi.yml",
-    "tronity-webhooks-api-openapi.yml"
+    "_original/tronity-openapi.yml"
   ],
   "outputs": [
     "tronity-authentication-api-openapi.yml",
@@ -19,6 +14,23 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "tronity-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "tronity-openapi.yml: declared missing tag: Authentication",
+    "tronity-openapi.yml: declared missing tag: Charging & Battery",
+    "tronity-openapi.yml: declared missing tag: Commands",
+    "tronity-openapi.yml: declared missing tag: Vehicle Data",
+    "tronity-openapi.yml: declared missing tag: Vehicles",
+    "tronity-openapi.yml: declared missing tag: Webhooks",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "tronity-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tronity-charging-battery-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tronity-commands-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tronity-vehicle-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tronity-vehicles-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tronity-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

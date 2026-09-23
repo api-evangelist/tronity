@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: TRONITY Platform Authentication API
-  description: The TRONITY Platform API provides normalized access to connected electric vehicle and fleet telematics across 20-plus OEM brands. It exposes vehicle listings and VIN, vehicle data (odometer, location, bulk last-known state, records, trips), battery state of charge and range, charging status and history, remote commands (start/stop charging, wake-up), and webhook subscriptions. Access is secured with OAuth2; an app authenticates with a client_id and client_secret to obtain a Bearer access token, and each request is constrained by the scopes the vehicle owner has granted.
+  description: The TRONITY Platform API provides normalized access to connected electric vehicle and fleet telematics across 20-plus OEM brands.
   termsOfService: https://www.tronity.io/en/terms
   contact:
     name: TRONITY Support
@@ -37,17 +37,6 @@ paths:
           description: Invalid credentials.
 components:
   schemas:
-    AuthResponse:
-      type: object
-      properties:
-        access_token:
-          type: string
-        token_type:
-          type: string
-        expires_in:
-          type: number
-        refresh_token:
-          type: string
     AuthRequest:
       type: object
       properties:
@@ -64,6 +53,17 @@ components:
           description: One of "app", "code" or "refresh_token".
       required:
       - grant_type
+    AuthResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+        token_type:
+          type: string
+        expires_in:
+          type: number
+        refresh_token:
+          type: string
   securitySchemes:
     bearerAuth:
       type: http

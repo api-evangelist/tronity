@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: TRONITY Platform Authentication Webhooks API
-  description: The TRONITY Platform API provides normalized access to connected electric vehicle and fleet telematics across 20-plus OEM brands. It exposes vehicle listings and VIN, vehicle data (odometer, location, bulk last-known state, records, trips), battery state of charge and range, charging status and history, remote commands (start/stop charging, wake-up), and webhook subscriptions. Access is secured with OAuth2; an app authenticates with a client_id and client_secret to obtain a Bearer access token, and each request is constrained by the scopes the vehicle owner has granted.
+  title: TRONITY Platform Webhooks API
+  description: The TRONITY Platform API provides normalized access to connected electric vehicle and fleet telematics across 20-plus OEM brands.
   termsOfService: https://www.tronity.io/en/terms
   contact:
     name: TRONITY Support
@@ -76,19 +76,6 @@ paths:
         '200':
           description: Webhook deleted.
 components:
-  parameters:
-    UserId:
-      name: userId
-      in: path
-      required: true
-      schema:
-        type: string
-    AppId:
-      name: appId
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
     Webhook:
       type: object
@@ -105,6 +92,19 @@ components:
           type: boolean
         secret:
           type: string
+  parameters:
+    UserId:
+      name: userId
+      in: path
+      required: true
+      schema:
+        type: string
+    AppId:
+      name: appId
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

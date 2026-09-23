@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: TRONITY Platform Authentication Vehicle Data API
-  description: The TRONITY Platform API provides normalized access to connected electric vehicle and fleet telematics across 20-plus OEM brands. It exposes vehicle listings and VIN, vehicle data (odometer, location, bulk last-known state, records, trips), battery state of charge and range, charging status and history, remote commands (start/stop charging, wake-up), and webhook subscriptions. Access is secured with OAuth2; an app authenticates with a client_id and client_secret to obtain a Bearer access token, and each request is constrained by the scopes the vehicle owner has granted.
+  title: TRONITY Platform Vehicle Data API
+  description: The TRONITY Platform API provides normalized access to connected electric vehicle and fleet telematics across 20-plus OEM brands.
   termsOfService: https://www.tronity.io/en/terms
   contact:
     name: TRONITY Support
@@ -124,28 +124,11 @@ paths:
         '200':
           description: A list of sleep periods.
 components:
-  parameters:
-    VehicleIdPath:
-      name: vehicleId
-      in: path
-      required: true
-      description: The vehicle identifier.
-      schema:
-        type: string
   schemas:
     Odometer:
       type: object
       properties:
         odometer:
-          type: number
-        timestamp:
-          type: number
-    Location:
-      type: object
-      properties:
-        latitude:
-          type: number
-        longitude:
           type: number
         timestamp:
           type: number
@@ -188,6 +171,15 @@ components:
           type: string
         longitude:
           type: string
+    Location:
+      type: object
+      properties:
+        latitude:
+          type: number
+        longitude:
+          type: number
+        timestamp:
+          type: number
     Bulk:
       type: object
       properties:
@@ -207,6 +199,14 @@ components:
           type: number
         timestamp:
           type: number
+  parameters:
+    VehicleIdPath:
+      name: vehicleId
+      in: path
+      required: true
+      description: The vehicle identifier.
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http
