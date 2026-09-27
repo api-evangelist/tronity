@@ -67,6 +67,14 @@ paths:
                 items:
                   $ref: '#/components/schemas/Charge'
 components:
+  parameters:
+    VehicleIdPath:
+      name: vehicleId
+      in: path
+      required: true
+      description: The vehicle identifier.
+      schema:
+        type: string
   schemas:
     Charge:
       type: object
@@ -123,14 +131,6 @@ components:
           type: number
         timestamp:
           type: number
-  parameters:
-    VehicleIdPath:
-      name: vehicleId
-      in: path
-      required: true
-      description: The vehicle identifier.
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

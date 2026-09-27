@@ -171,15 +171,6 @@ components:
           type: string
         longitude:
           type: string
-    Location:
-      type: object
-      properties:
-        latitude:
-          type: number
-        longitude:
-          type: number
-        timestamp:
-          type: number
     Bulk:
       type: object
       properties:
@@ -193,6 +184,15 @@ components:
           type: number
         charging:
           type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+        timestamp:
+          type: number
+    Location:
+      type: object
+      properties:
         latitude:
           type: number
         longitude:
