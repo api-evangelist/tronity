@@ -125,13 +125,6 @@ paths:
           description: A list of sleep periods.
 components:
   schemas:
-    Odometer:
-      type: object
-      properties:
-        odometer:
-          type: number
-        timestamp:
-          type: number
     Record:
       type: object
       properties:
@@ -171,6 +164,15 @@ components:
           type: string
         longitude:
           type: string
+    Location:
+      type: object
+      properties:
+        latitude:
+          type: number
+        longitude:
+          type: number
+        timestamp:
+          type: number
     Bulk:
       type: object
       properties:
@@ -190,12 +192,10 @@ components:
           type: number
         timestamp:
           type: number
-    Location:
+    Odometer:
       type: object
       properties:
-        latitude:
-          type: number
-        longitude:
+        odometer:
           type: number
         timestamp:
           type: number

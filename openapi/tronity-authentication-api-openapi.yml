@@ -37,6 +37,17 @@ paths:
           description: Invalid credentials.
 components:
   schemas:
+    AuthResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+        token_type:
+          type: string
+        expires_in:
+          type: number
+        refresh_token:
+          type: string
     AuthRequest:
       type: object
       properties:
@@ -53,17 +64,6 @@ components:
           description: One of "app", "code" or "refresh_token".
       required:
       - grant_type
-    AuthResponse:
-      type: object
-      properties:
-        access_token:
-          type: string
-        token_type:
-          type: string
-        expires_in:
-          type: number
-        refresh_token:
-          type: string
   securitySchemes:
     bearerAuth:
       type: http
