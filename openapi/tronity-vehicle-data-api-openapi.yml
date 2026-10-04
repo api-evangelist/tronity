@@ -124,6 +124,14 @@ paths:
         '200':
           description: A list of sleep periods.
 components:
+  parameters:
+    VehicleIdPath:
+      name: vehicleId
+      in: path
+      required: true
+      description: The vehicle identifier.
+      schema:
+        type: string
   schemas:
     Record:
       type: object
@@ -164,15 +172,6 @@ components:
           type: string
         longitude:
           type: string
-    Location:
-      type: object
-      properties:
-        latitude:
-          type: number
-        longitude:
-          type: number
-        timestamp:
-          type: number
     Bulk:
       type: object
       properties:
@@ -192,6 +191,15 @@ components:
           type: number
         timestamp:
           type: number
+    Location:
+      type: object
+      properties:
+        latitude:
+          type: number
+        longitude:
+          type: number
+        timestamp:
+          type: number
     Odometer:
       type: object
       properties:
@@ -199,14 +207,6 @@ components:
           type: number
         timestamp:
           type: number
-  parameters:
-    VehicleIdPath:
-      name: vehicleId
-      in: path
-      required: true
-      description: The vehicle identifier.
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

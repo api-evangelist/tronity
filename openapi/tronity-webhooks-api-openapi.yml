@@ -93,14 +93,14 @@ components:
         secret:
           type: string
   parameters:
-    UserId:
-      name: userId
+    AppId:
+      name: appId
       in: path
       required: true
       schema:
         type: string
-    AppId:
-      name: appId
+    UserId:
+      name: userId
       in: path
       required: true
       schema:
