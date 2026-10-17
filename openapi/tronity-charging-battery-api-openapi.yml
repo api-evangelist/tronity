@@ -68,6 +68,13 @@ paths:
                   $ref: '#/components/schemas/Charge'
 components:
   schemas:
+    ChargeStatus:
+      type: object
+      properties:
+        charging:
+          type: string
+        timestamp:
+          type: number
     Charge:
       type: object
       properties:
@@ -114,13 +121,6 @@ components:
           type: number
         level:
           type: number
-        timestamp:
-          type: number
-    ChargeStatus:
-      type: object
-      properties:
-        charging:
-          type: string
         timestamp:
           type: number
   parameters:

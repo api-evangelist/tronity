@@ -82,15 +82,15 @@ paths:
                     type: string
 components:
   parameters:
-    VehicleIdPath:
-      name: vehicleId
+    VehicleId:
+      name: id
       in: path
       required: true
       description: The vehicle identifier.
       schema:
         type: string
-    VehicleId:
-      name: id
+    VehicleIdPath:
+      name: vehicleId
       in: path
       required: true
       description: The vehicle identifier.
